@@ -68,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     * 员工登录
+     * 新增员工
      * @param employeeDTO
      */
     public void save(EmployeeDTO employeeDTO) {
@@ -95,5 +95,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         long total =page.getTotal();
         List<Employee> records =page.getResult();
         return new PageResult(total,records);
+    }
+
+    /**
+     * 启用禁用员工账号
+     * @param status,id
+     * @return
+     */
+    public void startOrStop(Integer status, long id) {
+        Employee employee=Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+        employeeMapper.update(employee);
     }
 }
